@@ -1,32 +1,54 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+
     <router-view/>
+
+    <el-row>
+      <el-button>默认按钮</el-button>
+      <el-button type="primary">主要按钮</el-button>
+      <el-button type="success">成功按钮</el-button>
+      <el-button type="info">信息按钮</el-button>
+      <el-button type="warning">警告按钮</el-button>
+      <el-button type="danger">危险按钮</el-button>
+    </el-row>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang='ts'>
+import Vue from 'vue'
+import Component from 'vue-class-component'
 
-#nav {
-  padding: 30px;
+@Component
+export default class App extends Vue {
+  a = 1
+  b = 2
+  c = '1234'
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  test () {
+    console.log(this.c)
   }
 }
-</style>
+
+</script>
+
+<!-- 使用extend
+<script lang='ts'>
+import Vue from 'vue'
+export default Vue.extend({
+  data () {
+    return {
+      a: 1,
+      b: 2,
+      c: '1234'
+    }
+  },
+  methods: {
+    test(){
+      this.a;
+    }
+  },
+})
+</script>
+-->
+
+<style lang="scss" scoped></style>
