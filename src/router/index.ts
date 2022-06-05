@@ -5,6 +5,7 @@ import store from '@/store'
 
 Vue.use(VueRouter)
 
+// 路由配置规则
 const routes: Array<RouteConfig> = [
   {
     path: '/login',
@@ -19,13 +20,9 @@ const routes: Array<RouteConfig> = [
     },
     children: [
       {
-        path: '', // 默认子路由, 可以'/'或者''， 建议''
+        path: '', // 默认子路由
         name: 'home',
-        component: () => import(/* webpackChunkName: 'home' */ '@/views/home/index.vue'),
-        // 配置在子路由会更加动态
-        meta: {
-          requiresAuth: true
-        }
+        component: () => import(/* webpackChunkName: 'home' */ '@/views/home/index.vue')
       },
       {
         path: '/role',
@@ -61,10 +58,55 @@ const routes: Array<RouteConfig> = [
         path: '/advert-space',
         name: 'advert-space',
         component: () => import(/* webpackChunkName: 'advert-space' */ '@/views/advert-space/index.vue')
-      }]
+      },
+      {
+        path: '/menu/create',
+        name: 'menu-create',
+        component: () => import(/* webpackChunkName: 'menu-create-edit' */ '@/views/menu/create.vue')
+      },
+      {
+        path: '/menu/:id/edit',
+        name: 'menu-edit',
+        component: () => import(/* webpackChunkName: 'menu-create-edit' */ '@/views/menu/edit.vue')
+      },
+      {
+        path: '/role/:roleId/alloc-menu',
+        name: 'alloc-menu',
+        component: () => import(/* webpackChunkName: 'alloc-menu' */ '@/views/role/alloc-menu.vue'),
+        props: true // 将路由路径参数映射到组件的 props 数据中
+      },
+      {
+        path: '/role/:roleId/alloc-resource',
+        name: 'alloc-resource',
+        component: () => import(/* webpackChunkName: 'alloc-menu' */ '@/views/role/alloc-resource.vue'),
+        props: true // 将路由路径参数映射到组件的 props 数据中
+      },
+      {
+        path: '/course/create',
+        name: 'course-create',
+        component: () => import(/* webpackChunkName: 'course-create' */ '@/views/course/create.vue')
+      },
+      {
+        path: '/course/:courseId/edit',
+        name: 'course-edit',
+        component: () => import(/* webpackChunkName: 'course-edit' */ '@/views/course/edit.vue'),
+        props: true
+      },
+      {
+        path: '/course/:courseId/section',
+        name: 'course-section',
+        component: () => import(/* webpackChunkName: 'course-section' */ '@/views/course/section.vue'),
+        props: true
+      },
+      {
+        path: '/course/:courseId/video',
+        name: 'course-video',
+        component: () => import(/* webpackChunkName: 'course-video' */ '@/views/course/video.vue'),
+        props: true
+      }
+    ]
   },
   {
-    // * 可以不放在最后，router会做处理。 不过一般放最后
     path: '*',
     name: '404',
     component: () => import(/* webpackChunkName: '404' */ '@/views/error-page/404.vue')
